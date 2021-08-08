@@ -10,10 +10,10 @@ from wordcloud import WordCloud, STOPWORDS, ImageColorGenerator
 #nltk.download('stopwords')
 
 stop = stopwords.words('english')
-newWords = ['thanks', 'thank', 'get', 'stream', 'hello']
+newWords = ['thank', 'get', 'stream', 'hello', 'u', 'also', 'but']
 stop.extend(newWords)
 
-en_supa = pd.read_csv("csv/en_supas.csv", index_col=0)
+en_supa = pd.read_csv("csv/en_supas_2021-07.csv")
 
 
 # Wordcloud that includes all super chats from the csv
@@ -32,25 +32,24 @@ def global_wordcloud():
 
 #Wordcloud that includes the super chats from a specific channel
 def channel_wordcloud():
-    # Suisei Channel Wordcloud
-    sui_chat = en_supa[en_supa['originChannelId'] == 'UC5CwaMl1eIgY8h02uZw7u8A']
-    sui_mask = np.array(Image.open("img/sui.png"))
+    vChat = en_supa[en_supa['originChannelId'] == 'UCS9uQI-jC3DE0L4IpXyvr6w']
+    vMask = np.array(Image.open("img/coco.png"))
 
-    image_colors = ImageColorGenerator(sui_mask)
+    image_colors = ImageColorGenerator(vMask)
 
-    text = ' '.join(chat for chat in sui_chat.body)
+    text = ' '.join(chat for chat in vChat.body)
 
-    wordcloud = WordCloud(stopwords=stop, width=800, height=800, max_words=20000, background_color="black",
-                          mode="RGBA", mask=sui_mask).generate(text)
+    wordcloud = WordCloud(stopwords=stop, width=800, height=800, max_words=30000, background_color="black",
+                          mode="RGBA", mask=vMask, collocations=False).generate(text)
 
     plt.figure(figsize=(16, 9), facecolor='k')
     plt.imshow(wordcloud.recolor(color_func=image_colors), interpolation='bilinear')
     plt.axis("off")
     plt.tight_layout(pad=0)
-    plt.savefig("img/wordcloud_sui3.png", dpi=700)
+    plt.savefig("img/wordcloud_coco_2021-07.png", dpi=700)
     plt.show()
 
 
 if __name__ == '__main__':
-    global_wordcloud()
+    #global_wordcloud()
     channel_wordcloud()
