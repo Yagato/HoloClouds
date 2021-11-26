@@ -32,8 +32,8 @@ def global_wordcloud():
 
 #Wordcloud that includes the super chats from a specific channel
 def channel_wordcloud():
-    vChat = en_supa[en_supa['originChannelId'] == 'UCS9uQI-jC3DE0L4IpXyvr6w']
-    vMask = np.array(Image.open("img/coco.png"))
+    vChat = en_supa[en_supa['originChannelId'] == 'UCvzGlP9oQwU--Y0r9id_jnA']
+    vMask = np.array(Image.open("img/subaru.png"))
 
     image_colors = ImageColorGenerator(vMask)
 
@@ -46,7 +46,7 @@ def channel_wordcloud():
     plt.imshow(wordcloud.recolor(color_func=image_colors), interpolation='bilinear')
     plt.axis("off")
     plt.tight_layout(pad=0)
-    plt.savefig("img/wordcloud_coco_2021-07.png", dpi=700)
+    plt.savefig("img/wordcloud_subaru_2021-07.png", dpi=700)
     plt.show()
 
 
